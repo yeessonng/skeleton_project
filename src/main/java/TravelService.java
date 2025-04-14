@@ -45,7 +45,7 @@ public class TravelService {
 
     public void showPaging() throws SQLException {
         List<TravelVO> list = dao.findBylist(pageCount);
-        System.out.println("\n관광지 목록");
+        System.out.println("\n[  관광지 목록  ]");
         System.out.println("============================================================================");
 
         for (TravelVO vo : list) {
