@@ -37,6 +37,7 @@ public class TravelService {
                 System.out.println("     " + part);  // 이후 줄은 들여쓰기
             }
         }
+        System.out.println("전화: " + vo.getPhone());
         System.out.println("----------------------------------------------------------------------------");
     }
 }

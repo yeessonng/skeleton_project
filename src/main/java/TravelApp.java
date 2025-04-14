@@ -33,7 +33,7 @@ public class TravelApp {
                     while (true) {
                         System.out.println("\n지역을 선택하세요:");
                         regionMap.forEach((key, value) -> System.out.println(key + ". " + value));
-                        System.out.print("번호를 입력해주세요. (9: 이전): ");
+                        System.out.print("번호를 입력해주세요. (9: 이전 화면): ");
                         String regionChoice = scanner.hasNextLine() ? scanner.nextLine() : "";
 
                         int regionNum;
@@ -64,7 +64,7 @@ public class TravelApp {
                                     System.out.println((i + 1) + ". " + tourList.get(i).getTitle());
                                 }
 
-                                System.out.print("상세정보를 확인하려면 관광지 번호를 입력하세요 (9: 이전, 0: 초기화면): ");
+                                System.out.print("상세정보를 확인하려면 관광지 번호를 입력하세요 (9: 이전 화면, 0: 초기화면): ");
                                 String input = scanner.hasNextLine() ? scanner.nextLine() : "";
 
                                 int index = Integer.parseInt(input);
@@ -109,7 +109,7 @@ public class TravelApp {
 
                 case "2":
                     while (true) {
-                        System.out.print("관광지명이나 키워드를 입력하세요 (예: 남이섬, 케이블카... 9: 이전): ");
+                        System.out.print("관광지명이나 키워드를 입력하세요 (예: 남이섬, 케이블카... 9: 이전 화면): ");
                         String title = scanner.hasNextLine() ? scanner.nextLine() : "";
                         if (title.equals("9")) break;
 
@@ -122,7 +122,7 @@ public class TravelApp {
                                 continue; // 검색 성공 후 다시 검색
                             }
                         } catch (Exception e) {
-                            System.out.println("오류 발생: " + e.getMessage());
+                            System.out.println("error : " + e.getMessage());
                         }
                     }
                     break;
