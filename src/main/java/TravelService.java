@@ -66,8 +66,17 @@ public class TravelService {
                 }
             }
             System.out.println(" 전화: " + vo.getPhone());
+            System.out.println("-----------------------------------------------------------------------");
         }
-        System.out.println("--------------------------------"+ pageCount +"------------------------------");
+        System.out.println("──────────────────────────────────────────────────────");
+
+        System.out.println("                    ◀ [ " + pageCount + " / " + 12 + " ] ▶");
+
+        System.out.println("──────────────────────────────────────────────────────");
+        System.out.println("이전 페이지는 ◀ , 다음 페이지는 ▶ , 종료하려면 q:");
+
+
+
     }
 
     public void printMultiline(String text, int lineLength) {

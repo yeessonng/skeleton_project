@@ -12,8 +12,6 @@ public class TravelApp {
             } catch (SQLException e) {
                 System.out.println("DB 오류: " + e.getMessage());
             }
-
-            System.out.println("이전 페이지는 <, 다음 페이지는 >, 종료하려면 q:");
             String input = scanner.nextLine();
 
             if (input.equals("q")) {
@@ -21,8 +19,14 @@ public class TravelApp {
                 break;
             } else if (input.equals("<")) {
                 TravelService.pageCount--;
+                if(TravelService.pageCount == 0){
+                    TravelService.pageCount = 12;
+                }
             } else if (input.equals(">")) {
                 TravelService.pageCount++;
+                if(TravelService.pageCount == 13){
+                    TravelService.pageCount = 1;
+                }
             } else {
                 System.out.println("잘못된 입력입니다.");
             }
