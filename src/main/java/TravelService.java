@@ -24,7 +24,7 @@ public class TravelService {
             System.out.println(" 주소: " + vo.getAddress());
             // System.out.print(" 소개: ");
             // printMultiline(vo.getDescription(), 80); // 글자수 마다 줄바꿈
-            // 정령
+            // 정렬
             String description = vo.getDescription();
             int lineLength = 80;  // 몇 글자마다 줄바꿈할지 (조절 가능)
             System.out.print(" 소개: ");
