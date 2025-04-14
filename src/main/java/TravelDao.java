@@ -3,12 +3,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TravelDao {
+
+    private Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/travel_db";
+        String user = "root";
+        String password = "98653232";
+        return DriverManager.getConnection(url, user, password);
+    }
+
+    // 전체 조회
+    public List<TravelVO> findBylist(int page) throws SQLException {
+        List<TravelVO> list = new ArrayList<>();
+        int pageSize = 10; // 한 페이지에 10개 보여줌
+        int offset = (page - 1) * pageSize;
+
+        String sql = "SELECT * FROM travel LIMIT ? OFFSET ?";
+
+        try (
+                Connection conn = getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setInt(1, pageSize);
+            pstmt.setInt(2, offset);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                TravelVO vo = new TravelVO();
+                vo.setNo(rs.getInt("no"));
+                vo.setDistrict(rs.getString("district"));
+                vo.setTitle(rs.getString("title"));
+                vo.setDescription(rs.getString("description"));
+                vo.setAddress(rs.getString("address"));
+                vo.setPhone(rs.getString("phone"));
+                list.add(vo);
+            }
+        }
+
+        return list;
+    }
+
     public List<TravelVO> findByDistrict(String district) throws SQLException {
         List<TravelVO> list = new ArrayList<>();
 
         String url = "jdbc:mysql://localhost:3306/travel_db?useSSL=false&characterEncoding=UTF-8";
         String user = "root";
-        String password = "!12345";
+        String password = "98653232";
 
         String sql = "SELECT * FROM travel WHERE district LIKE ?";
 
