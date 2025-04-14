@@ -3,7 +3,7 @@ import java.util.List;
 
 public class TravelService {
     private TravelDao dao = new TravelDao();
-    public static int pageCount;
+    public static int pageCount = 1;
 
     public List<TravelVO> getTourListByDistrict(String region) throws Exception {
         return dao.findByDistrict(region);
@@ -74,7 +74,7 @@ public class TravelService {
         System.out.println("                    ◀ [ " + pageCount + " / " + 12 + " ] ▶");
 
         System.out.println("──────────────────────────────────────────────────────");
-        System.out.println("이전 페이지는 ◀ , 다음 페이지는 ▶ , 종료하려면 q:");
+        System.out.println("이전 페이지는 ◀, 다음 페이지는 ▶, 이전 화면 exit");
 
 
 

@@ -38,10 +38,6 @@ public class TravelDao {
     public List<TravelVO> findByTitle(String keyword) throws Exception {
         List<TravelVO> list = new ArrayList<>();
 
-        String url = "jdbc:mysql://localhost:3306/travel_db";
-        String user = "root";
-        String password = "98653232";
-
         String sql = "SELECT * FROM travel WHERE title LIKE ?";
 
         try (Connection conn = getConnection();

@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.*;
 
 public class TravelApp {
@@ -18,7 +19,7 @@ public class TravelApp {
         System.out.println("║           Welcome to the Travel Search App          ║");
         System.out.println("║      관광지 검색 프로그램에 오신 걸 환영합니다!     ║");
         System.out.println("╚═════════════════════════════════════════════════════╝\n");
-
+        String input = "";
         mainLoop: while (true) {
             System.out.println("=== 관광지 검색 프로그램 ===");
             System.out.println("1. 전체 관광지 목록 조회");
@@ -31,30 +32,31 @@ public class TravelApp {
 
             switch (choice) {
                 case "1":
-                    try {
-                        service.showPaging();
-                    } catch (SQLException e) {
-                        System.out.println("DB 오류: " + e.getMessage());
-                    }
-                    String input = scanner.nextLine();
-
-                    if (input.equals("q")) {
-                        System.out.println("종료합니다!");
-                        break;
-                    } else if (input.equals("<")) {
-                        TravelService.pageCount--;
-                        if(TravelService.pageCount == 0){
-                            TravelService.pageCount = 12;
+                    while (true) {
+                        try {
+                            service.showPaging();
+                        } catch (SQLException e) {
+                            System.out.println("DB 오류: " + e.getMessage());
                         }
-                    } else if (input.equals(">")) {
-                        TravelService.pageCount++;
-                        if(TravelService.pageCount == 13){
-                            TravelService.pageCount = 1;
-                        }
-                    } else {
-                        System.out.println("잘못된 입력입니다.");
-                    }
+                        input = scanner.nextLine();
 
+                        if (input.equals("exit")) {
+                            System.out.println("종료합니다!");
+                            continue mainLoop;
+                        } else if (input.equals("<")) {
+                            TravelService.pageCount--;
+                            if(TravelService.pageCount == 0){
+                                TravelService.pageCount = 12;
+                            }
+                        } else if (input.equals(">")) {
+                            TravelService.pageCount++;
+                            if(TravelService.pageCount == 13){
+                                TravelService.pageCount = 1;
+                            }
+                        } else {
+                            System.out.println("잘못된 입력입니다.");
+                        }
+                    }
                 case "2":
                     while (true) {
                         System.out.println("\n지역을 선택하세요:");
