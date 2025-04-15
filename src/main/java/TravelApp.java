@@ -17,7 +17,7 @@ public class TravelApp {
 
         System.out.println("╔═════════════════════════════════════════════════════╗");
         System.out.println("║           Welcome to the Travel Search App          ║");
-        System.out.println("║      관광지 검색 프로그램에 오신 걸 환영합니다!            ║");
+        System.out.println("║      관광지 검색 프로그램에 오신 걸 환영합니다!     ║");
         System.out.println("╚═════════════════════════════════════════════════════╝");
         String input = "";
 

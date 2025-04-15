@@ -7,7 +7,7 @@ public class TravelDao {
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/travel_db";
         String user = "root";
-        String password = "98653232";
+        String password = "!12345";
         return DriverManager.getConnection(url, user, password);
     }
 
@@ -17,7 +17,7 @@ public class TravelDao {
         String sql = "SELECT * FROM travel WHERE district LIKE ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + district + "%");
             ResultSet rs = pstmt.executeQuery();
@@ -41,7 +41,7 @@ public class TravelDao {
         String sql = "SELECT * FROM travel WHERE title LIKE ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + keyword + "%");
             ResultSet rs = pstmt.executeQuery();
