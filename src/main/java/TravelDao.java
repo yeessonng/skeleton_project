@@ -7,7 +7,7 @@ public class TravelDao {
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/travel_db";
         String user = "root";
-        String password = "!12345";
+        String password = "98653232";
         return DriverManager.getConnection(url, user, password);
     }
 

@@ -33,13 +33,12 @@ public class TravelApp {
 
             switch (choice) {
                 case "1":
+                    try {
+                        service.showPaging();
+                    } catch (SQLException e) {
+                        System.out.println("DB 오류: " + e.getMessage());
+                    }
                     while (true) {
-                        try {
-                            service.showPaging();
-                        } catch (SQLException e) {
-                            System.out.println("DB 오류: " + e.getMessage());
-                        }
-
                         input = scanner.nextLine();
 
                         if (input.equals("exit")) {
@@ -56,7 +55,15 @@ public class TravelApp {
                                 TravelService.pageCount = 1;
                             }
                         } else {
-                            System.out.println("잘못된 입력입니다.\n");
+                            System.out.println("잘못된 입력입니다.");
+                            System.out.println("이전 페이지는 ◀, 다음 페이지는 ▶, 이전 화면 exit");
+                            continue;
+                        }
+
+                        try {
+                            service.showPaging();
+                        } catch (SQLException e) {
+                            System.out.println("DB 오류: " + e.getMessage());
                         }
                     }
 
