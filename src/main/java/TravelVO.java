@@ -1,4 +1,5 @@
 public class TravelVO {
+    private int no;
     private String district;
     private String title;
     private String description;
@@ -42,5 +43,13 @@ public class TravelVO {
     }
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 }
