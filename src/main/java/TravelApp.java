@@ -18,10 +18,11 @@ public class TravelApp {
         System.out.println("╔═════════════════════════════════════════════════════╗");
         System.out.println("║           Welcome to the Travel Search App          ║");
         System.out.println("║      관광지 검색 프로그램에 오신 걸 환영합니다!     ║");
-        System.out.println("╚═════════════════════════════════════════════════════╝\n");
+        System.out.println("╚═════════════════════════════════════════════════════╝");
         String input = "";
+
         mainLoop: while (true) {
-            System.out.println("=== 관광지 검색 프로그램 ===");
+            System.out.println("\n=== 관광지 검색 프로그램 ===");
             System.out.println("1. 전체 관광지 목록 조회");
             System.out.println("2. 권역별 관광지 목록 조회");
             System.out.println("3. 관광지명 or 키워드로 검색");
@@ -38,25 +39,27 @@ public class TravelApp {
                         } catch (SQLException e) {
                             System.out.println("DB 오류: " + e.getMessage());
                         }
+
                         input = scanner.nextLine();
 
                         if (input.equals("exit")) {
-                            System.out.println("종료합니다!");
+                            System.out.println("종료합니다!\n");
                             continue mainLoop;
                         } else if (input.equals("<")) {
                             TravelService.pageCount--;
-                            if(TravelService.pageCount == 0){
+                            if (TravelService.pageCount == 0) {
                                 TravelService.pageCount = 12;
                             }
                         } else if (input.equals(">")) {
                             TravelService.pageCount++;
-                            if(TravelService.pageCount == 13){
+                            if (TravelService.pageCount == 13) {
                                 TravelService.pageCount = 1;
                             }
                         } else {
-                            System.out.println("잘못된 입력입니다.");
+                            System.out.println("잘못된 입력입니다.\n");
                         }
                     }
+
                 case "2":
                     while (true) {
                         System.out.println("\n지역을 선택하세요:");
@@ -73,7 +76,7 @@ public class TravelApp {
                                 continue;
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("숫자를 입력해주세요.\n");
+                            System.out.println("숫자를 입력해주세요.");
                             continue;
                         }
 
@@ -95,11 +98,18 @@ public class TravelApp {
                                 System.out.print("상세정보를 확인하려면 관광지 번호를 입력하세요 (9: 이전, 0: 초기화면): ");
                                 input = scanner.hasNextLine() ? scanner.nextLine() : "";
 
-                                int index = Integer.parseInt(input);
+                                int index;
+                                try {
+                                    index = Integer.parseInt(input);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("숫자를 입력해주세요.");
+                                    continue;
+                                }
+
                                 if (index == 0) continue mainLoop;
                                 if (index == 9) break;
                                 if (index < 1 || index > tourList.size()) {
-                                    System.out.println("잘못된 번호입니다.\n");
+                                    System.out.println("잘못된 번호입니다.");
                                     continue;
                                 }
 
@@ -137,14 +147,14 @@ public class TravelApp {
 
                 case "3":
                     while (true) {
-                        System.out.print("관광지명이나 키워드를 입력하세요 (예: 남이섬, 케이블카... 9: 이전 화면): ");
+                        System.out.print("\n관광지명이나 키워드를 입력하세요 (예: 남이섬, 케이블카... 9: 이전 화면): ");
                         String title = scanner.hasNextLine() ? scanner.nextLine() : "";
                         if (title.equals("9")) break;
 
                         try {
                             boolean found = service.showTourListByTitle(title);
                             if (!found) {
-                                System.out.println("해당 관광지를 찾을 수 없습니다. 다시 입력해주세요.\n");
+                                System.out.println("해당 관광지를 찾을 수 없습니다. 다시 입력해주세요.");
                             } else {
                                 System.out.println();
                                 continue; // 검색 성공 후 다시 검색
@@ -162,7 +172,7 @@ public class TravelApp {
                     return;
 
                 default:
-                    System.out.println("올바른 메뉴 번호를 선택해주세요.\n");
+                    System.out.println("올바른 메뉴 번호를 선택해주세요.");
             }
         }
     }
