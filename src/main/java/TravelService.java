@@ -40,7 +40,7 @@ public class TravelService {
             }
         }
         System.out.println("전화: " + vo.getPhone());
-        System.out.print("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
     }
 
     public void showPaging() throws SQLException {

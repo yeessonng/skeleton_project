@@ -17,7 +17,7 @@ public class TravelApp {
 
         System.out.println("╔═════════════════════════════════════════════════════╗");
         System.out.println("║           Welcome to the Travel Search App          ║");
-        System.out.println("║      관광지 검색 프로그램에 오신 걸 환영합니다!     ║");
+        System.out.println("║      관광지 검색 프로그램에 오신 걸 환영합니다!            ║");
         System.out.println("╚═════════════════════════════════════════════════════╝");
         String input = "";
 
@@ -94,8 +94,9 @@ public class TravelApp {
                                 for (int i = 0; i < tourList.size(); i++) {
                                     System.out.println((i + 1) + ". " + tourList.get(i).getTitle());
                                 }
+                                System.out.println(tourList.size()+1 + ". " + "전체 보기");
 
-                                System.out.print("상세정보를 확인하려면 관광지 번호를 입력하세요 (9: 이전, 0: 초기화면): ");
+                                System.out.print("상세정보를 확인하시려면 관광지 번호를 입력하세요 (9: 이전, 0: 초기화면): ");
                                 input = scanner.hasNextLine() ? scanner.nextLine() : "";
 
                                 int index;
@@ -108,32 +109,65 @@ public class TravelApp {
 
                                 if (index == 0) continue mainLoop;
                                 if (index == 9) break;
-                                if (index < 1 || index > tourList.size()) {
+                                if (index < 1 || index > tourList.size() + 1) {
                                     System.out.println("잘못된 번호입니다.");
                                     continue;
                                 }
+                                int num = 1;
+                                if (index == tourList.size() + 1) {
+                                    // 전체 관광지 상세 출력
+                                    System.out.println("\n===== 관광지 상세 정보 =====");
+                                    for (TravelVO tour : tourList) {
+                                        System.out.println(" 번호: " + num);
+                                        System.out.println(" 이름: " + tour.getTitle());
+                                        System.out.println(" 지역: " + tour.getDistrict());
+                                        System.out.println(" 주소: " + tour.getAddress());
+                                        num++;
+                                        String description = tour.getDescription();
+                                        int lineLength = 80;
+                                        System.out.print(" 소개: ");
 
-                                TravelVO selected = tourList.get(index - 1);
-                                System.out.println("\n===== 관광지 상세 정보 =====");
-                                System.out.println(" 이름: " + selected.getTitle());
-                                System.out.println(" 지역: " + selected.getDistrict());
-                                System.out.println(" 주소: " + selected.getAddress());
+                                        for (int i = 0; i < description.length(); i += lineLength) {
+                                            int end = Math.min(i + lineLength, description.length());
+                                            String part = description.substring(i, end);
+                                            if (i == 0) {
+                                                System.out.println(part);
+                                            } else {
+                                                System.out.println("       " + part);
+                                            }
+                                        }
 
-                                String description = selected.getDescription();
-                                int lineLength = 80;
-                                System.out.print(" 소개: ");
-                                for (int i = 0; i < description.length(); i += lineLength) {
-                                    int end = Math.min(i + lineLength, description.length());
-                                    String part = description.substring(i, end);
-                                    if (i == 0) {
-                                        System.out.println(part);
-                                    } else {
-                                        System.out.println("       " + part);
+                                        System.out.println(" 전화: " + tour.getPhone());
+                                        System.out.println("===========================");
                                     }
+
+                                } else {
+                                    // 개별 관광지 선택
+                                    TravelVO selected = tourList.get(index - 1);
+                                    System.out.println("\n===== 관광지 상세 정보 =====");
+                                    System.out.println(" 이름: " + selected.getTitle());
+                                    System.out.println(" 지역: " + selected.getDistrict());
+                                    System.out.println(" 주소: " + selected.getAddress());
+
+                                    String description = selected.getDescription();
+                                    int lineLength = 80;
+                                    System.out.print(" 소개: ");
+                                    for (int i = 0; i < description.length(); i += lineLength) {
+                                        int end = Math.min(i + lineLength, description.length());
+                                        String part = description.substring(i, end);
+                                        if (i == 0) {
+                                            System.out.println(part);
+                                        } else {
+                                            System.out.println("       " + part);
+                                        }
+                                    }
+
+                                    System.out.println(" 전화: " + selected.getPhone());
+                                    System.out.println("===========================\n");
                                 }
 
-                                System.out.println(" 전화: " + selected.getPhone());
-                                System.out.println("===========================\n");
+
+
 
                                 System.out.print("Enter를 누르면 목록으로 돌아갑니다...");
                                 scanner.nextLine();
@@ -147,7 +181,7 @@ public class TravelApp {
 
                 case "3":
                     while (true) {
-                        System.out.print("\n관광지명이나 키워드를 입력하세요 (예: 남이섬, 케이블카... 9: 이전 화면): ");
+                        System.out.print("관광지명이나 키워드를 입력하세요 (예: 남이섬, 케이블카... 9: 이전 화면): ");
                         String title = scanner.hasNextLine() ? scanner.nextLine() : "";
                         if (title.equals("9")) break;
 
